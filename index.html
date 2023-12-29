@@ -1,236 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
-      referrerpolicy="no-referrer"
-    />
-    <title>Domain Watcher</title>
-  </head>
-  <body>
-    <div class="flex flex-col w-full min-h-screen bg-gray-100">
-      <header class="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-        <a
-          class="flex items-center gap-2 text-lg font-semibold sm:text-base mr-4"
-          href="#"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="w-6 h-6"
-          >
-            <path
-              d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
-            ></path>
-          </svg>
-          <span class="sr-only">Company Inc</span>
-        </a>
-        <nav
-          class="hidden font-medium sm:flex flex-row items-center gap-5 text-sm lg:gap-6"
-        >
-          <a class="font-bold" href="#"> Domains </a>
-          <a class="text-gray-500 dark:text-gray-400" href="#"> Settings </a>
-        </nav>
-        <div
-          class="flex items-center w-full gap-4 md:ml-auto md:gap-2 lg:gap-4"
-        >
-          <button
-            class="inline-flex items-center justify-center text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-10 w-10 rounded-full ml-auto"
-          >
-            <img
-              src="/placeholder.svg"
-              width="32"
-              height="32"
-              class="rounded-full border"
-              alt="Avatar"
-              style="aspect-ratio: 32 / 32; object-fit: cover"
-            />
-            <span class="sr-only">Toggle user menu</span>
-          </button>
-        </div>
-      </header>
-      <main
-        class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40"
-      >
-        <h1 class="text-3xl font-semibold">Domain Status Monitor</h1>
-        <div
-          class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl w-full mx-auto"
-        >
-          <div
-            class="rounded-lg border bg-card text-card-foreground shadow-sm"
-            data-v0-t="card"
-          >
-            <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-8 h-8"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" x2="22" y1="12" y2="12"></line>
-                <path
-                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                ></path>
-              </svg>
-              <div class="grid gap-1">
-                <h3 class="text-2xl font-semibold leading-none tracking-tight">
-                  example1.com
-                </h3>
-                <p class="text-sm text-muted-foreground">Web Server</p>
-              </div>
-            </div>
-            <div class="p-6 grid gap-2">
-              <div
-                class="inline-flex rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground items-center"
-                color="green"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                Up
-              </div>
-              <p class="text-sm">No issues detected.</p>
-            </div>
-          </div>
-          <div
-            class="rounded-lg border bg-card text-card-foreground shadow-sm"
-            data-v0-t="card"
-          >
-            <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-8 h-8"
-              >
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
-                <path d="M3 12A9 3 0 0 0 21 12"></path>
-              </svg>
-              <div class="grid gap-1">
-                <h3 class="text-2xl font-semibold leading-none tracking-tight">
-                  example2.com
-                </h3>
-                <p class="text-sm text-muted-foreground">Database Server</p>
-              </div>
-            </div>
-            <div class="p-6 grid gap-2">
-              <div
-                class="inline-flex rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground items-center"
-                color="red"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path
-                    d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"
-                  ></path>
-                  <path d="M12 9v4"></path>
-                  <path d="M12 17h.01"></path>
-                </svg>
-                Down
-              </div>
-              <p class="text-sm">Experiencing connection issues.</p>
-            </div>
-          </div>
-          <div
-            class="rounded-lg border bg-card text-card-foreground shadow-sm"
-            data-v0-t="card"
-          >
-            <div class="space-y-1.5 p-6 flex flex-row items-center gap-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="w-8 h-8"
-              >
-                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-              </svg>
-              <div class="grid gap-1">
-                <h3 class="text-2xl font-semibold leading-none tracking-tight">
-                  example3.com
-                </h3>
-                <p class="text-sm text-muted-foreground">Email Server</p>
-              </div>
-            </div>
-            <div class="p-6 grid gap-2">
-              <div
-                class="inline-flex rounded-full border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground items-center"
-                color="green"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="h-4 w-4"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                Up
-              </div>
-              <p class="text-sm">No issues detected.</p>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Domain Watcher</title>
+</head>
+<body>
+  <div class="flex flex-col w-full min-h-screen bg-gray-100 dark:bg-gray-900">
+    <main
+      class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
+      <h1 class="text-3xl font-semibold">Domain Status Monitor</h1>
+      <h2 class="text-xl font-semibold">Add Domain</h2>
+      <div>
+        <input type="text" placeholder="Domain name" class="input input-bordered input-info w-full max-w-xs" />
+        <button class="btn" type="submit">Check Domain</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th class="text-lg">Domain</th>
+              <th class="text-lg">HTTP Status</th>
+              <th class="text-lg">Certificate Expiry</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            {{ range .Domains }} {{ block "domain-list-element" . }}
+            <tr>
+              <td class="text-base">{{ .Name }}</td>
+              <td class="text-base">{{ .StatusCode }}</td>
+              <td class="text-base">{{ .CertificateExpiry }} <span>✔️</span></td>
+            </tr>
+            {{ end }} {{ end }}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
 </html>
