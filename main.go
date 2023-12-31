@@ -38,14 +38,17 @@ func main() {
 	}
 
 	handler2 := func(w http.ResponseWriter, r *http.Request) {
-		name := r.PostFormValue("name")
+		domainName := r.PostFormValue("domain-name")
+		statusCode := 200
+		certificateExpiry := "June 20, 2024"
+
 		tmpl := template.Must(template.ParseFiles("index.html"))
 
-		tmpl.ExecuteTemplate(w, "domain-list-element", Domain{Name: name, StatusCode: 200, CertificateExpiry: "June 20, 2024"})
+		tmpl.ExecuteTemplate(w, "domain-list-element", Domain{Name: domainName, StatusCode: statusCode, CertificateExpiry: certificateExpiry})
 	}
 
 	http.HandleFunc("/", handler1)
-	http.HandleFunc("/add-domain", handler2)
+	http.HandleFunc("/add-domain/", handler2)
 
 	log.Fatal(http.ListenAndServe(port, nil))
 }
