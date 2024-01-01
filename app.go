@@ -69,7 +69,7 @@ func main() {
 	http.HandleFunc("/healthcheck", healthCheck)
 
 	handler1 := func(w http.ResponseWriter, r *http.Request) {
-		tmpl := template.Must(template.ParseFiles("index.html"))
+		tmpl := template.Must(template.ParseFiles("templates/index.html"))
 		// domains := map[string][]Domain{
 		// 	"Domains": {
 		// 		{
@@ -88,7 +88,7 @@ func main() {
 		statusCode := checkDomainStatus(domainName)
 		certificateExpiry := checkCertificateExpiry(domainName)
 
-		tmpl := template.Must(template.ParseFiles("index.html"))
+		tmpl := template.Must(template.ParseFiles("templates/index.html"))
 
 		tmpl.ExecuteTemplate(w, "domain-list-element", Domain{Name: domainName, StatusCode: statusCode, CertificateExpiry: certificateExpiry})
 	}
