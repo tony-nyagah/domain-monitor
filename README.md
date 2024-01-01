@@ -1,5 +1,5 @@
 ## Domain Monitor 🌐
-A web application to monitor whether or not a site is up and running as intended.
+A web application that monitors a domain's status i.e. ssl status and http response status.
 
 ### How it works
 1. The application starts a server on a specified port (default: 8080).
@@ -14,14 +14,14 @@ A web application to monitor whether or not a site is up and running as intended
 [Go](https://go.dev/) 🏃‍♂️    
 
 ### Tools Used
-[HTMX](https://htmx.org/)   
+[HTMX](https://htmx.org/)    
 [DaisyUI](https://daisyui.com/)
 
 ### Installation
 1. Clone the repository: git clone https://github.com/tony-nyagah/domain-monitor.git.
-2. Change to the project directory: ```cd your-repo.```
-3. Build the application: ```go build -o domain-monitor.```
-4. Run the application: ```./domain-monitor.```
+2. Change to the project directory: ```cd domain-monitor```.
+3. Build the application: ```go build -o domain-monitor```.
+4. Run the application: ```./domain-monitor```.
 
 ### Configuration
 * Port: The server port can be configured by modifying the port variable in app.go.
