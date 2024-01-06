@@ -17,9 +17,16 @@ type Domain struct {
 	CertificateExpiry string
 }
 
+type DomainCheckResult struct {
+	StatusCode        string
+	CertificateExpiry string
+	TlsError          bool
+	ErrorMessage      string
+}
+
 func checkDomainStatus(domainName string) string {
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: false,
+		InsecureSkipVerify: true,
 	}
 
 	client := &http.Client{
@@ -29,6 +36,7 @@ func checkDomainStatus(domainName string) string {
 	}
 
 	resp, err := client.Get("https://" + domainName)
+
 	if err != nil {
 		log.Println("Error:", err)
 		return "Error: " + err.Error()
