@@ -35,7 +35,7 @@ func isValidURL(inputURL string) bool {
 
 func checkDomainStatus(domainName string) string {
 	tlsConfig := &tls.Config{
-		InsecureSkipVerify: false,
+		InsecureSkipVerify: true,
 	}
 
 	client := &http.Client{
