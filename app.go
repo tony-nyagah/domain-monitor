@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"text/template"
@@ -15,6 +16,21 @@ type Domain struct {
 	Name              string
 	StatusCode        string
 	CertificateExpiry string
+}
+
+func isValidURL(inputURL string) bool {
+	_, err := url.ParseRequestURI(inputURL)
+	if err != nil {
+		return false
+	}
+
+	resp, err := http.Get(inputURL)
+	if err != nil {
+		return false
+	}
+
+	defer resp.Body.Close()
+	return true
 }
 
 func checkDomainStatus(domainName string) string {
@@ -28,11 +44,13 @@ func checkDomainStatus(domainName string) string {
 		},
 	}
 
-	resp, err := client.Get("https://" + domainName)
-	if err != nil {
-		log.Println("Error:", err)
-		return "Error: " + err.Error()
+	fullUrl := "https://" + domainName
+
+	if isValidURL(fullUrl) == false {
+		return "Invalid URL."
 	}
+
+	resp, _ := client.Get(fullUrl)
 
 	defer resp.Body.Close()
 
@@ -44,8 +62,14 @@ func checkDomainStatus(domainName string) string {
 
 func checkCertificateExpiry(domainName string) string {
 	conn, err := tls.Dial("tcp", domainName+":443", nil)
+
 	if err != nil {
-		return "Error: " + err.Error()
+		switch err.(type) {
+		case *tls.CertificateVerificationError:
+			return "Certificate verification failed."
+		default:
+			return "Connection failed."
+		}
 	}
 	defer conn.Close()
 
