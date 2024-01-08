@@ -10,6 +10,9 @@ A web application that monitors a domain's status i.e. ssl status and http respo
 6. The status and certificate expiry information are displayed in the list of monitored domains.
 7. The application periodically checks the status and certificate expiry of all monitored domains.
 
+### How it looks
+![](./assets/screenshot.png)
+
 ### Dependencies
 [Go](https://go.dev/) 🏃‍♂️    
 

@@ -1,49 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.23/dist/full.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.9/htmx.min.js"
-    integrity="sha512-FSS62yxqCRMCtm1J+ddRwX8DuCRVt/WMpihCo06P+Je5AG4CV9yoLX53zHaOB5w/eZdG7d/QAyUEJTnHZHrWKg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <title>Domain Watcher</title>
-</head>
-<body>
-  <div class="flex flex-col w-full min-h-screen bg-gray-100 dark:bg-gray-900">
-    <main
-      class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40">
-      <h1 class="text-3xl font-semibold">Domain Status Monitor</h1>
-      <h2 class="text-xl font-semibold">Add Domain</h2>
-      <div>
-        <form hx-post="/add-domain/" hx-target="#domain-list" hx-swap="beforeend">
-          <input type="text" name="domain-name" placeholder="Enter a domain name e.g. example.com"
-            class="input input-bordered input-info w-full max-w-xs" />
-          <button class="btn" type="submit">Check Domain</button>
-        </form>
-      </div>
-      <div class="overflow-x-auto">
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="text-lg">Domain</th>
-              <th class="text-lg">HTTP Status</th>
-              <th class="text-lg">Certificate Expiry</th>
-            </tr>
-          </thead>
-          <tbody id="domain-list">
-            {{ range .Domains }} {{ block "domain-list-element" . }}
-            <tr>
-              <td class="text-base">{{ .Name }}</td>
-              <td class="text-base">{{ .StatusCode }}</td>
-              <td class="text-base">{{ .CertificateExpiry }}</td>
-            </tr>
-            {{ end }} {{ end }}
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.23/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/htmx/1.9.9/htmx.min.js"
+      integrity="sha512-FSS62yxqCRMCtm1J+ddRwX8DuCRVt/WMpihCo06P+Je5AG4CV9yoLX53zHaOB5w/eZdG7d/QAyUEJTnHZHrWKg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Domain Monitor</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  </head>
+  <body>
+    <div class="flex flex-col w-full min-h-screen bg-gray-100 dark:bg-gray-900">
+      <main
+        class="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 p-4 md:gap-8 md:p-10 dark:bg-gray-800/40"
+      >
+        <h1 class="text-3xl font-semibold">Domain Status Monitor</h1>
+        <h2 class="text-xl font-semibold">Add Domain</h2>
+        <div>
+          <form
+            hx-post="/add-domain/"
+            hx-target="#domain-list"
+            hx-swap="beforeend"
+          >
+            <input
+              type="text"
+              name="domain-name"
+              placeholder="Enter a domain name e.g. example.com"
+              class="input input-bordered input-info w-full max-w-xs"
+            />
+            <button class="btn" type="submit">Check Domain</button>
+          </form>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="text-lg">Domain</th>
+                <th class="text-lg">HTTP Status</th>
+                <th class="text-lg">Certificate Expiry</th>
+              </tr>
+            </thead>
+            <tbody id="domain-list">
+              {{ range .Domains }} {{ block "domain-list-element" . }}
+              <tr>
+                <td class="text-base">{{ .Name }}</td>
+                <td class="text-base">{{ .StatusCode }}</td>
+                <td class="text-base">{{ .CertificateExpiry }}</td>
+              </tr>
+              {{ end }} {{ end }}
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </body>
 </html>
