@@ -16,6 +16,7 @@ type Domain struct {
 	Name              string
 	StatusCode        string
 	CertificateExpiry string
+	CertificateIssuer string
 }
 
 func isValidURL(inputURL string) bool {
@@ -24,7 +25,17 @@ func isValidURL(inputURL string) bool {
 		return false
 	}
 
-	resp, err := http.Get(inputURL)
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: true,
+	}
+
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: tlsConfig,
+		},
+	}
+
+	resp, err := client.Get(inputURL)
 	if err != nil {
 		return false
 	}
@@ -83,6 +94,28 @@ func checkCertificateExpiry(domainName string) string {
 	}
 }
 
+func checkCertificateIssuer(domainName string) string {
+	conn, err := tls.Dial("tcp", domainName+":443", nil)
+
+	if err != nil {
+		return "N/A"
+	}
+	defer conn.Close()
+
+	cert := conn.ConnectionState().PeerCertificates[0]
+	issuer := "N/A"
+
+	// Try to get the Organization name first (more readable)
+	if len(cert.Issuer.Organization) > 0 {
+		issuer = cert.Issuer.Organization[0]
+	} else if cert.Issuer.CommonName != "" {
+		// Fallback to CommonName if Organization is not available
+		issuer = cert.Issuer.CommonName
+	}
+
+	return issuer
+}
+
 func main() {
 	port := ":8080"
 	log.Println("Starting server on port", strings.Split(port, ":")[1])
@@ -111,10 +144,11 @@ func main() {
 		domainName := r.PostFormValue("domain-name")
 		statusCode := checkDomainStatus(domainName)
 		certificateExpiry := checkCertificateExpiry(domainName)
+		certificateIssuer := checkCertificateIssuer(domainName)
 
 		tmpl := template.Must(template.ParseFiles("templates/index.html"))
 
-		tmpl.ExecuteTemplate(w, "domain-list-element", Domain{Name: domainName, StatusCode: statusCode, CertificateExpiry: certificateExpiry})
+		tmpl.ExecuteTemplate(w, "domain-list-element", Domain{Name: domainName, StatusCode: statusCode, CertificateExpiry: certificateExpiry, CertificateIssuer: certificateIssuer})
 	}
 
 	http.HandleFunc("/", handler1)
