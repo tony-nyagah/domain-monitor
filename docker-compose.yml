@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  domain-monitor:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./templates:/app/templates
+      - ./assets:/app/assets
+    restart: unless-stopped
